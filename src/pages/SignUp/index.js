@@ -2,8 +2,6 @@ import React from 'react';
 
 // import { Container } from './styles';
 
-function SignUp() {
-  return <div />;
-}
+const SignUp = () => <h1>Register</h1>;
 
 export default SignUp;
