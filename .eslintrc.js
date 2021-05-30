@@ -17,7 +17,7 @@ module.exports = {
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'import/prefer-default-export': 'off',
     'no-console': ['error', { allow: ['tron', 'log'] }],
-    'no-param-reassing': 'off',
+    'no-param-reassign': 'off',
     'prettier/prettier': ['error', { singleQuote: true, jsxSingleQuote: true }],
     'react-hooks/exhaustive-deps': 'warn',
     'react-hooks/rules-of-hooks': 'error',

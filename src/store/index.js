@@ -8,10 +8,10 @@ const sagaMonitor =
     ? console.tron.createSagaMonitor()
     : null;
 
-const sagaMiddlewate = createSagaMiddleware({ sagaMonitor });
-const middlewares = [sagaMiddlewate];
+const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
+const middlewares = [sagaMiddleware];
 const store = createStore(rootReducer, middlewares);
 
-sagaMiddlewate.run(rootSaga);
+sagaMiddleware.run(rootSaga);
 
 export default store;
