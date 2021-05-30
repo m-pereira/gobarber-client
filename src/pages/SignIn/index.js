@@ -1,7 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import logo from '~/assets/logo.svg';
 
-// import { Container } from './styles';
+const SignIn = () => (
+  <>
+    <img src={logo} alt='Gobarber-logo' />
 
-const SignIn = () => <h1>SignIn page</h1>;
+    <form>
+      <input type='email' placeholder='Seu e-mail' />
+      <input type='password' placeholder='Sua senha secreta' />
+
+      <button type='submit'>Acessar</button>
+      <Link to='/register'>Criar conta gratuita</Link>
+    </form>
+  </>
+);
 
 export default SignIn;
