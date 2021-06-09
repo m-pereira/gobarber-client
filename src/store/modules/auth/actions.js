@@ -10,6 +10,11 @@ export const signInSuccess = (token, user) => ({
   payload: { token, user },
 });
 
+export const signUpRequest = (name, email, password) => ({
+  type: actionTypes.SIGN_UP_REQUEST,
+  payload: { name, email, password },
+});
+
 export const signFailure = () => ({
   type: actionTypes.SIGN_FAILURE,
 });

@@ -1,7 +1,10 @@
 import React from 'react';
+import api from '~/services/api';
 
-// import { Container } from './styles';
+const Dashboard = () => {
+  api.get('users');
 
-const Dashboard = () => <h1>Dashboard</h1>;
+  return <h1>Dashboard</h1>;
+};
 
 export default Dashboard;
