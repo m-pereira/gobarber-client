@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Notification from '../Notification';
 import { Container, Content, Profile } from './styles';
 import logo from '~/assets/logo-header.svg';
 
@@ -12,6 +13,8 @@ const Header = () => (
       </nav>
 
       <aside>
+        <Notification />
+
         <Profile>
           <div>
             <strong>Fulano de tal</strong>
