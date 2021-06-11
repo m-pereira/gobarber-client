@@ -5,7 +5,8 @@ import { Wrapper } from './styles';
 
 const DefaultLayout = ({ children }) => (
   <Wrapper>
-    <Header>{children}</Header>
+    <Header />
+    {children}
   </Wrapper>
 );
 
