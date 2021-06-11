@@ -1,10 +1,10 @@
 import React from 'react';
-import api from '~/services/api';
 
-const Dashboard = () => {
-  api.get('users');
-
-  return <h1>Dashboard</h1>;
-};
+const Dashboard = () => (
+  <>
+    <h1>Dashboard</h1>
+    <p>Alow galera do dashboard</p>
+  </>
+);
 
 export default Dashboard;

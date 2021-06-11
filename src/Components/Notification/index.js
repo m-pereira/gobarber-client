@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { parseISO, formatDistance } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import { MdNotifications } from 'react-icons/md';
 import {
   Container,
@@ -7,58 +9,76 @@ import {
   NotificationItem,
   Scroll,
 } from './styles';
+import api from '~/services/api';
 
-const Notification = () => (
-  <Container>
-    <Badge hasUnread>
-      <MdNotifications color='#7159c1' size={20} />
-    </Badge>
+const Notification = () => {
+  const [visible, setVisible] = useState(false);
+  const [notifications, setNotifications] = useState([]);
 
-    <NotificationList>
-      <Scroll>
-        <NotificationItem unread>
-          <p>Você possui um novo agendamento para amanhã</p>
-          <time>há 2 dias</time>
-          <button type='button'>Marcar como lida</button>
-        </NotificationItem>
-        <NotificationItem>
-          <p>Você possui um novo agendamento para amanhã</p>
-          <time>há 2 dias</time>
-          <button type='button'>Marcar como lida</button>
-        </NotificationItem>
-        <NotificationItem>
-          <p>Você possui um novo agendamento para amanhã</p>
-          <time>há 2 dias</time>
-          <button type='button'>Marcar como lida</button>
-        </NotificationItem>
-        <NotificationItem>
-          <p>Você possui um novo agendamento para amanhã</p>
-          <time>há 2 dias</time>
-          <button type='button'>Marcar como lida</button>
-        </NotificationItem>
-        <NotificationItem>
-          <p>Você possui um novo agendamento para amanhã</p>
-          <time>há 2 dias</time>
-          <button type='button'>Marcar como lida</button>
-        </NotificationItem>
-        <NotificationItem>
-          <p>Você possui um novo agendamento para amanhã</p>
-          <time>há 2 dias</time>
-          <button type='button'>Marcar como lida</button>
-        </NotificationItem>
-        <NotificationItem>
-          <p>Você possui um novo agendamento para amanhã</p>
-          <time>há 2 dias</time>
-          <button type='button'>Marcar como lida</button>
-        </NotificationItem>
-        <NotificationItem>
-          <p>Você possui um novo agendamento para amanhã</p>
-          <time>há 2 dias</time>
-          <button type='button'>Marcar como lida</button>
-        </NotificationItem>
-      </Scroll>
-    </NotificationList>
-  </Container>
-);
+  const hasUnread = useMemo(
+    () => !!notifications.find((n) => n.read === false),
+    [notifications]
+  );
+
+  const handleToggleVisible = () => setVisible(!visible);
+  const handleMarkAsRead = async (id) => {
+    await api.put(`notifications/${id}`);
+
+    setNotifications(
+      notifications.map((notification) =>
+        notification._id === id ? { ...notification, read: true } : notification
+      )
+    );
+  };
+
+  useEffect(() => {
+    const loadNotifications = async () => {
+      const response = await api.get('notifications');
+
+      const data = response.data.map((notification) => ({
+        ...notification,
+        timeDistance: formatDistance(
+          parseISO(notification.createdAt),
+          new Date(),
+          { addSuffix: true, locale: pt }
+        ),
+      }));
+
+      return setNotifications(data);
+    };
+
+    loadNotifications();
+  }, []);
+
+  return (
+    <Container>
+      <Badge onClick={handleToggleVisible} hasUnread={hasUnread}>
+        <MdNotifications color='#7159c1' size={20} />
+      </Badge>
+
+      <NotificationList visible={visible}>
+        <Scroll>
+          {notifications.map((notification) => (
+            <NotificationItem
+              key={notification._id}
+              unread={!notification.read}
+            >
+              <p>{notification.content}</p>
+              <time>{notification.timeDistance}</time>
+              {!notification.read && (
+                <button
+                  onClick={() => handleMarkAsRead(notification._id)}
+                  type='button'
+                >
+                  Marcar como lida
+                </button>
+              )}
+            </NotificationItem>
+          ))}
+        </Scroll>
+      </NotificationList>
+    </Container>
+  );
+};
 
 export default Notification;

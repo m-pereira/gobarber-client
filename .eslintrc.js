@@ -23,6 +23,7 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react/jsx-filename-extension': ['warn', { extensions: ['.jsx', '.js'] }],
     'react/jsx-props-no-spreading': 'off',
+    'no-underscore-dangle': 'off',
   },
   settings: {
     'import/resolver': {
