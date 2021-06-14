@@ -18,12 +18,13 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'no-console': ['error', { allow: ['tron', 'log'] }],
     'no-param-reassign': 'off',
+    'no-underscore-dangle': 'off',
     'prettier/prettier': ['error', { singleQuote: true, jsxSingleQuote: true }],
     'react-hooks/exhaustive-deps': 'warn',
     'react-hooks/rules-of-hooks': 'error',
     'react/jsx-filename-extension': ['warn', { extensions: ['.jsx', '.js'] }],
     'react/jsx-props-no-spreading': 'off',
-    'no-underscore-dangle': 'off',
+    camelcase: 'off',
   },
   settings: {
     'import/resolver': {
