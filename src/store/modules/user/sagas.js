@@ -21,7 +21,7 @@ export function* updateProfile({ payload }) {
 
     yield put(updateProfileSuccess(response.data));
   } catch (e) {
-    toast.error('Erro ao atualizar, confira seus dados.');
+    toast.error(`Erro ao atualizar, confira seus dados. ${e}`);
     yield put(updateProfileFailure());
   }
 }

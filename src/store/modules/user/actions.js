@@ -1,15 +1,15 @@
-import * as UserTypes from './types';
+import * as userTypes from './types';
 
 export const updateProfileRequest = (data) => ({
-  type: UserTypes.UPDATE_PROFILE_REQUEST,
+  type: userTypes.UPDATE_PROFILE_REQUEST,
   payload: { data },
 });
 
 export const updateProfileSuccess = (profile) => ({
-  type: UserTypes.UPDATE_PROFILE_SUCCESS,
+  type: userTypes.UPDATE_PROFILE_SUCCESS,
   payload: { profile },
 });
 
 export const updateProfileFailure = () => ({
-  type: UserTypes.UPDATE_PROFILE_FAILURE,
+  type: userTypes.UPDATE_PROFILE_FAILURE,
 });

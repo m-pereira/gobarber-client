@@ -1,5 +1,10 @@
 import produce from 'immer';
-import { SIGN_FAILURE, SIGN_IN_REQUEST, SIGN_IN_SUCCESS } from './types';
+import {
+  SIGN_FAILURE,
+  SIGN_IN_REQUEST,
+  SIGN_IN_SUCCESS,
+  SIGN_OUT,
+} from './types';
 
 const INITIAL_STATE = {
   token: null,
@@ -20,6 +25,10 @@ const auth = (state = INITIAL_STATE, action) =>
         break;
       case SIGN_FAILURE:
         draft.loading = false;
+        break;
+      case SIGN_OUT:
+        draft.token = null;
+        draft.signed = false;
         break;
       default:
     }
