@@ -1,34 +1,42 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Notification from '../Notification';
 import { Container, Content, Profile } from './styles';
 import logo from '~/assets/logo-header.svg';
 
-const Header = () => (
-  <Container>
-    <Content>
-      <nav>
-        <img src={logo} alt='GoBarber' />
-        <Link to='/dashboard'>DASHBOARD</Link>
-      </nav>
+const Header = () => {
+  const profile = useSelector((state) => state.user.profile);
 
-      <aside>
-        <Notification />
+  return (
+    <Container>
+      <Content>
+        <nav>
+          <img src={logo} alt='GoBarber' />
+          <Link to='/dashboard'>DASHBOARD</Link>
+        </nav>
 
-        <Profile>
-          <div>
-            <strong>Fulano de tal</strong>
-            <Link to='/profile'>Meu perfil</Link>
-          </div>
+        <aside>
+          <Notification />
 
-          <img
-            src='https://images.apilist.fun/adorable_avatars_api.png'
-            alt='Avatar'
-          />
-        </Profile>
-      </aside>
-    </Content>
-  </Container>
-);
+          <Profile>
+            <div>
+              <strong>{profile.name}</strong>
+              <Link to='/profile'>Meu perfil</Link>
+            </div>
+
+            <img
+              src={
+                profile.avatar.url ||
+                'https://images.apilist.fun/adorable_avatars_api.png'
+              }
+              alt='Avatar'
+            />
+          </Profile>
+        </aside>
+      </Content>
+    </Container>
+  );
+};
 
 export default Header;
