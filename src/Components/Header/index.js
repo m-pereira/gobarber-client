@@ -27,8 +27,9 @@ const Header = () => {
 
             <img
               src={
-                profile.avatar.url ||
-                'https://images.apilist.fun/adorable_avatars_api.png'
+                profile.avatar
+                  ? profile.avatar.url
+                  : 'https://images.apilist.fun/adorable_avatars_api.png'
               }
               alt='Avatar'
             />
